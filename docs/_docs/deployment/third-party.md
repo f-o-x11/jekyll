@@ -94,3 +94,14 @@ In [this guide](https://www.azion.com/en/documentation/products/guides/jekyll-bo
 ## harvis
 
 [harvis](https://harvis.dev) is zero-setup static hosting. Run `npx harvis` in your `_site` folder after `jekyll build` and it uploads the files as-is and prints a live URL — no account, no config. Run it again to update the same site. Free for small sites.
+
+## deed.page
+
+[deed.page](https://deed.page) is static hosting built for AI agents and scripts. After `jekyll build`, pack the contents of `_site` and upload them with one request:
+
+```sh
+tar -C _site -czf site.tar.gz .
+curl -T site.tar.gz "https://deed.page/v1/sites?slug=your-site-name" -H "Content-Type: application/gzip"
+```
+
+The JSON response contains the live `https://your-site-name.deed.page/` URL and a token. Send the token as `Authorization: Bearer <token>` with the same request to update the site. The free plan needs no account. Sites larger than 4 MB use the manifest upload described in the [deed.page docs](https://deed.page/docs).
